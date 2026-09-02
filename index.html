@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nash Studio - Jasa Pembuatan Website & Sistem Digital Premium</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#FFFBEB',
+                            100: '#FEF3C7',
+                            200: '#FDE68A',
+                            500: '#F59E0B',
+                            600: '#D97706', // Primary Amber
+                            700: '#B45309',
+                            900: '#78350F',
+                        },
+                        accent: {
+                            orange: '#EA580C',
+                            dark: '#0F172A',
+                        }
+                    },
+                    width: {
+                        '50': '12.5rem', // Custom 200px width
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .accordion-active .accordion-content {
+            max-height: 200px;
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #D97706 0%, #EA580C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .typed-cursor {
+            opacity: 1;
+            animation: blink 0.7s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body class="bg-white text-slate-800 font-sans antialiased overflow-x-hidden selection:bg-brand-100 selection:text-brand-900">
+
+    <!-- NAVIGATION HEADER -->
+    <header id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 py-2 border-b border-slate-100 bg-white/95">
+        <div class="max-w-6xl mx-auto px-4 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#hero" class="flex items-center gap-2 group">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-600 to-accent-orange flex items-center justify-center text-white shadow-sm group-hover:scale-105 transition-transform duration-200">
+                    <i data-lucide="code-2" class="w-4 h-4"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-display font-extrabold text-sm tracking-tight text-slate-900 leading-tight">
+                        <span id="nav-brand-name">Nash</span> <span id="nav-brand-suffix" class="text-brand-600">Studio</span>
+                    </span>
+                    <span id="nav-brand-tag" class="text-[8px] text-slate-400 font-bold tracking-wider uppercase leading-none">Digital System</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Menu -->
+            <nav class="hidden md:flex items-center gap-5 font-medium text-[11px] uppercase tracking-wider text-slate-600">
+                <a href="#solusi" class="hover:text-brand-600 transition-colors duration-150">Layanan</a>
+                <a href="#portfolio" class="hover:text-brand-600 transition-colors duration-150">Portofolio</a>
+                <a href="#keunggulan" class="hover:text-brand-600 transition-colors duration-150">Kenapa Kami</a>
+                <a href="#pricing" class="hover:text-brand-600 transition-colors duration-150">Paket Harga</a>
+                <a href="#faq" class="hover:text-brand-600 transition-colors duration-150">Tanya Jawab</a>
+            </nav>
+
+            <!-- Actions -->
+            <div class="hidden md:flex items-center gap-2">
+                <a href="#contact" class="px-2.5 py-1.5 rounded-lg border border-slate-200 text-[11px] font-semibold hover:bg-slate-50 transition-colors duration-150 text-slate-700">Kritik & Saran</a>
+                <button onclick="openConsultationModal()" class="px-3.5 py-1.5 rounded-lg bg-brand-600 hover:bg-brand-700 text-white text-[11px] font-semibold shadow-sm flex items-center gap-1.5 active:scale-95 transition-all duration-150">
+                    <i data-lucide="phone-call" class="w-3 h-3"></i>
+                    <span>Konsultasi Gratis</span>
+                </button>
+            </div>
+
+            <!-- Mobile Hamburger Button -->
+            <button id="mobile-menu-btn" class="md:hidden p-1.5 rounded-md hover:bg-slate-50 transition-colors" aria-label="Toggle Menu">
+                <i id="menu-icon" data-lucide="menu" class="w-5 h-5 text-slate-700"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-white border-b border-slate-100 shadow-md px-4 py-3 flex flex-col gap-2">
+            <nav class="flex flex-col gap-1.5 font-medium text-xs text-slate-700">
+                <a href="#solusi" class="mobile-link py-1 hover:text-brand-600 border-b border-slate-50">Layanan</a>
+                <a href="#portfolio" class="mobile-link py-1 hover:text-brand-600 border-b border-slate-50">Portofolio</a>
+                <a href="#keunggulan" class="mobile-link py-1 hover:text-brand-600 border-b border-slate-50">Kenapa Kami</a>
+                <a href="#pricing" class="mobile-link py-1 hover:text-brand-600 border-b border-slate-50">Paket Harga</a>
+                <a href="#faq" class="mobile-link py-1 hover:text-brand-600 border-b border-slate-50">Tanya Jawab</a>
+            </nav>
+            <div class="flex flex-col gap-1.5 pt-1.5">
+                <a href="#contact" class="mobile-link text-center py-2 rounded-lg border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-50">Kritik & Saran</a>
+                <button onclick="openConsultationModal()" class="w-full py-2 rounded-lg bg-brand-600 text-white text-xs font-semibold text-center flex items-center justify-center gap-1.5 shadow-sm">
+                    <i data-lucide="phone-call" class="w-3.5 h-3.5"></i>
+                    <span>Mulai Konsultasi Sekarang</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="relative pt-24 pb-12 md:pt-36 md:pb-16 bg-white overflow-hidden">
+        <div class="absolute inset-0 z-0 pointer-events-none opacity-20">
+            <div class="absolute top-4 right-[-10%] w-[300px] h-[300px] rounded-full bg-brand-50 blur-[60px]"></div>
+            <div class="absolute bottom-4 left-[-15%] w-[400px] h-[400px] rounded-full bg-orange-50 blur-[80px]"></div>
+        </div>
+
+        <div class="max-w-4xl mx-auto px-4 relative z-10 flex flex-col items-center text-center">
+            <!-- Main Heading with TYPING EFFECT -->
+            <h1 class="font-display font-extrabold text-2xl sm:text-3xl md:text-4xl text-slate-900 leading-tight max-w-2xl tracking-tight mb-3">
+                <span id="hero-title-1">Jasa Pembuatan Website &</span><br>
+                <span id="hero-title-2">Sistem Digital yang</span> <span id="typed-text" class="text-gradient"></span><span class="typed-cursor text-brand-600">|</span>
+            </h1>
+
+            <!-- Subheading -->
+            <p id="hero-subtitle" class="text-slate-500 text-xs sm:text-sm max-w-md font-normal leading-relaxed mb-5">
+                Kami membantu kamu mengembangkan website modern yang rapi, super cepat, dan mudah dikelola. Mulai dari landing page penjualan hingga sistem manajemen data internal otomatis.
+            </p>
+
+            <!-- Call to Actions -->
+            <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto justify-center items-center mb-3">
+                <button onclick="openConsultationModal()" class="w-50 h-9 rounded-lg bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold shadow-sm hover:shadow transition-all duration-200 active:scale-95 flex items-center justify-center gap-1.5 shrink-0">
+                    <i data-lucide="phone" class="w-3.5 h-3.5"></i>
+                    <span id="hero-cta-primary">Mulai Konsultasi Gratis</span>
+                </button>
+                <a href="#portfolio" class="w-50 h-9 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold transition-all duration-200 flex items-center justify-center gap-1 group shrink-0">
+                    <span id="hero-cta-secondary">Lihat Hasil Kerja</span>
+                    <i data-lucide="arrow-right" class="w-3 h-3 group-hover:translate-x-0.5 transition-transform"></i>
+                </a>
+            </div>
+
+            <!-- Fast process metric -->
+            <div class="flex items-center gap-1 text-[10px] font-bold text-slate-400">
+                <i data-lucide="clock" class="w-3 h-3 text-brand-500"></i>
+                <span id="hero-process-badge">Pengerjaan Kilat: 3 - 7 Hari Kerja</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROBLEM AGITATION SECTION -->
+    <section class="py-12 md:py-14 border-t border-slate-100 bg-slate-50/60">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="text-center max-w-xl mx-auto mb-6">
+                <span id="problems-badge" class="text-[10px] font-bold tracking-wider text-brand-600 uppercase mb-0.5 block">Hambatan Bisnis</span>
+                <h2 id="problems-title" class="font-display font-extrabold text-xl sm:text-2xl text-slate-900 mb-1 leading-tight">
+                    Apakah Kamu Sering Mengalami Kendala Ini?
+                </h2>
+                <p id="problems-desc" class="text-slate-500 text-xs">
+                    Banyak bisnis dan organisasi kesulitan berkembang karena pengelolaan data yang manual dan pengeluaran sistem yang menguras anggaran.
+                </p>
+            </div>
+
+            <!-- Dynamic Problem Cards -->
+            <div id="problems-grid" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
+
+            <!-- Serverless Value Prop Banner -->
+            <div class="mt-6 p-5 rounded-xl bg-gradient-to-tr from-brand-600 to-accent-orange text-white relative overflow-hidden shadow-sm">
+                <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.08),transparent)] pointer-events-none"></div>
+                <div class="relative z-10 max-w-4xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                    <div class="space-y-1">
+                        <span id="banner-badge" class="inline-block px-2 py-0.5 bg-white/15 backdrop-blur-sm rounded-full text-[9px] font-bold tracking-wider uppercase">Inovasi Bebas Biaya Server</span>
+                        <h3 id="banner-title" class="font-display font-extrabold text-lg leading-tight">Solusi Bebas Biaya Server Tahunan!</h3>
+                        <p id="banner-desc" class="text-white/90 text-[11px] max-w-xl font-normal leading-relaxed">
+                            Kami merancang website dan sistem internal cerdas menggunakan infrastruktur cloud handal. Hasilnya cepat, aman, stabil, dan 100% bebas biaya langganan hosting selamanya.
+                        </p>
+                    </div>
+                    <a id="banner-btn" href="#pricing" class="px-4 py-2 rounded-lg bg-white text-brand-700 font-bold hover:bg-slate-50 active:scale-95 transition-all duration-150 text-[11px] shrink-0 shadow-sm">
+                        Lihat Jasa Kami
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section id="solusi" class="py-12 md:py-14 bg-white">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="text-center max-w-xl mx-auto mb-6">
+                <span id="services-badge" class="text-[10px] font-bold tracking-wider text-brand-600 uppercase mb-0.5 block">Layanan Kami</span>
+                <h2 id="services-title" class="font-display font-extrabold text-xl sm:text-2xl text-slate-900 mb-1">
+                    Solusi Website & Sistem Untuk Usahamu
+                </h2>
+                <p id="services-desc" class="text-slate-500 text-xs">
+                    Pilih jenis solusi digital terbaik yang disesuaikan secara khusus demi meningkatkan efisiensi harian kamu.
+                </p>
+            </div>
+
+            <!-- Dynamic Services Grid -->
+            <div id="services-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO SECTION -->
+    <section id="portfolio" class="py-12 md:py-14 border-t border-slate-100 bg-slate-50/60">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="text-center max-w-xl mx-auto mb-6">
+                <span id="portfolio-badge" class="text-[10px] font-bold tracking-wider text-brand-600 uppercase mb-0.5 block">Karya Kami</span>
+                <h2 id="portfolio-title" class="font-display font-extrabold text-xl sm:text-2xl text-slate-900 mb-1">
+                    Portofolio Project Terbaru
+                </h2>
+                <p id="portfolio-desc" class="text-slate-500 text-xs">
+                    Berikut adalah hasil kerja nyata berupa website dan sistem digital tepercaya yang kami kembangkan untuk para mitra setia kami.
+                </p>
+            </div>
+
+            <!-- Interactive Tabs/Filters -->
+            <div id="portfolio-tabs-container" class="flex flex-wrap justify-center items-center gap-1.5 mb-6"></div>
+
+            <!-- Dynamic Portfolio Grid -->
+            <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 gap-5"></div>
+
+            <!-- Toggle Show All Projects Button Container -->
+            <div id="toggle-portfolio-container" class="mt-7 flex justify-center hidden">
+                <button onclick="toggleShowAllProjects()" id="toggle-portfolio-btn" class="w-50 h-9 rounded-lg bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold flex items-center justify-center gap-1.5 transition-all duration-150 active:scale-95 shadow-sm">
+                    <span id="toggle-portfolio-text">Lihat Semua Proyek</span>
+                    <i id="toggle-portfolio-icon" data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-500"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ADVANTAGES / WHY US SECTION -->
+    <section id="keunggulan" class="py-12 md:py-14 bg-white">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="text-center max-w-xl mx-auto mb-6">
+                <span id="whyus-badge" class="text-[10px] font-bold tracking-wider text-brand-600 uppercase mb-0.5 block">Keunggulan Kami</span>
+                <h2 id="whyus-title" class="font-display font-extrabold text-xl sm:text-2xl text-slate-900 mb-1">
+                    Kenapa Mempercayakan Nash Studio?
+                </h2>
+                <p id="whyus-desc" class="text-slate-500 text-xs">
+                    Kami memahami kamu memerlukan hasil terbaik yang langsung mendongkrak penjualan atau menyederhanakan tugas administrasi secara praktis.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+                <!-- Checklist Column -->
+                <div id="whyus-checklist" class="space-y-3.5"></div>
+
+                <!-- Highlight Banners Column -->
+                <div id="whyus-highlights" class="space-y-3"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING SECTION -->
+    <section id="pricing" class="py-12 md:py-14 border-t border-slate-100 bg-slate-50/60">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="text-center max-w-xl mx-auto mb-6">
+                <span id="pricing-badge" class="text-[10px] font-bold tracking-wider text-brand-600 uppercase mb-0.5 block">Investasi Terjangkau</span>
+                <h2 id="pricing-title" class="font-display font-extrabold text-xl sm:text-2xl text-slate-900 mb-1">
+                    Pilihan Paket Harga Merakyat & Transparan
+                </h2>
+                <p id="pricing-desc" class="text-slate-500 text-xs">
+                    Misi kami adalah menghadirkan website handal dengan biaya sangat hemat dan ramah kantong untuk mendukung semua kalangan digitalisasi.
+                </p>
+            </div>
+
+            <!-- Dynamic Pricing Grid -->
+            <div id="pricing-grid" class="grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch"></div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section class="py-12 md:py-14 bg-white">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="text-center max-w-xl mx-auto mb-6">
+                <span id="testi-badge" class="text-[10px] font-bold tracking-wider text-brand-600 uppercase mb-0.5 block">Kepuasan Klien</span>
+                <h2 id="testi-title" class="font-display font-extrabold text-xl sm:text-2xl text-slate-900 mb-1">
+                    Apa Kata Mereka Tentang Kami?
+                </h2>
+                <p id="testi-desc" class="text-slate-500 text-xs">
+                    Kami bangga dapat mendukung serta memudahkan operasional bisnis dan program sosial dari para mitra setia kami.
+                </p>
+            </div>
+
+            <!-- Dynamic Testimonials Grid -->
+            <div id="testimonials-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section id="faq" class="py-12 md:py-14 border-t border-slate-100 bg-slate-50/60">
+        <div class="max-w-2xl mx-auto px-4">
+            <div class="text-center mb-6">
+                <span id="faq-badge" class="text-[10px] font-bold tracking-wider text-brand-600 uppercase mb-0.5 block">Pusat Bantuan</span>
+                <h2 id="faq-title" class="font-display font-extrabold text-xl sm:text-2xl text-slate-900 mb-1">
+                    Pertanyaan yang Sering Diajukan
+                </h2>
+                <p id="faq-desc" class="text-slate-500 text-xs">
+                    Berikut adalah jawaban dari beberapa pertanyaan mendasar seputar pengerjaan website bersama Nash Studio.
+                </p>
+            </div>
+
+            <!-- Dynamic FAQ Accordion -->
+            <div id="faq-accordion" class="space-y-2"></div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA SECTION -->
+    <section class="py-12 bg-gradient-to-tr from-brand-900 to-accent-orange text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.06),transparent)] pointer-events-none"></div>
+        <div class="max-w-2xl mx-auto px-4 text-center relative z-10 space-y-4">
+            <h2 id="final-cta-title" class="font-display font-extrabold text-xl sm:text-2xl leading-tight tracking-tight">
+                Siap Jadikan Bisnis Kamu Lebih Maju & Efisien?
+            </h2>
+            <p id="final-cta-desc" class="text-brand-100 text-xs max-w-md mx-auto font-normal leading-relaxed">
+                Tinggalkan pencatatan manual yang melelahkan. Kami siap merancang alur kerja otomatis berkecepatan tinggi demi pertumbuhan usahamu.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-2.5">
+                <button onclick="openConsultationModal()" class="px-5 py-2 rounded-lg bg-white text-brand-900 text-xs font-bold transition-all duration-150 hover:scale-[1.01] active:scale-95 shadow-sm flex items-center justify-center gap-2 mx-auto">
+                    <i data-lucide="message-circle" class="w-4 h-4 text-brand-600"></i>
+                    <span id="final-cta-btn">Hubungi Kami via WhatsApp</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 text-slate-400 pt-12 pb-6 border-t border-slate-900">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <!-- Brand Info -->
+                <div class="space-y-3">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-600 to-accent-orange flex items-center justify-center text-white">
+                            <i data-lucide="code-2" class="w-4 h-4"></i>
+                        </div>
+                        <span class="font-display font-extrabold text-sm text-white tracking-tight">
+                            <span id="footer-brand-name">Nash</span> <span id="footer-brand-suffix" class="text-brand-500">Studio</span>
+                        </span>
+                    </div>
+                    <p id="footer-brand-desc" class="text-[11px] text-slate-400 max-w-sm leading-relaxed">
+                        Jasa pengerjaan website inovatif dan pengembangan sistem administrasi berbasis cloud modern dengan biaya yang sangat terjangkau bagi UMKM, sekolah, dan semua kalangan.
+                    </p>
+                    <div class="flex items-center gap-2" id="footer-social-links">
+                        <a href="#" class="w-7 h-7 rounded-full bg-slate-900 hover:bg-brand-600 hover:text-white flex items-center justify-center transition-colors duration-150 text-slate-400">
+                            <i data-lucide="instagram" class="w-3.5 h-3.5"></i>
+                        </a>
+                        <a href="#" class="w-7 h-7 rounded-full bg-slate-900 hover:bg-brand-600 hover:text-white flex items-center justify-center transition-colors duration-150 text-slate-400">
+                            <i data-lucide="facebook" class="w-3.5 h-3.5"></i>
+                        </a>
+                        <a href="#" class="w-7 h-7 rounded-full bg-slate-900 hover:bg-brand-600 hover:text-white flex items-center justify-center transition-colors duration-150 text-slate-400">
+                            <i data-lucide="mail" class="w-3.5 h-3.5"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Critique & Suggestion Form -->
+                <div id="contact" class="bg-slate-900/40 border border-slate-900 rounded-xl p-4 space-y-3 relative overflow-hidden">
+                    <div class="space-y-0.5">
+                        <h3 class="font-display font-bold text-white text-sm">Formulir Kritik & Saran</h3>
+                        <p class="text-[10px] text-slate-500">Suara kamu sangat berarti demi peningkatan berkelanjutan layanan kami.</p>
+                    </div>
+
+                    <form id="feedback-form" onsubmit="handleFeedbackSubmit(event)" class="space-y-2.5">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                            <div class="space-y-1">
+                                <label for="form-name" class="text-[8px] text-slate-400 font-bold uppercase tracking-wider">Nama Kamu</label>
+                                <input type="text" id="form-name" required class="w-full bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-brand-500 transition-colors" placeholder="Masukkan namamu...">
+                            </div>
+                            <div class="space-y-1">
+                                <label for="form-contact" class="text-[8px] text-slate-400 font-bold uppercase tracking-wider">Kontak (WA/Email)</label>
+                                <input type="text" id="form-contact" required class="w-full bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-brand-500 transition-colors" placeholder="No WhatsApp / email kamu...">
+                            </div>
+                        </div>
+                        <div class="space-y-1">
+                            <label for="form-message" class="text-[8px] text-slate-400 font-bold uppercase tracking-wider">Isi Kritik & Masukan</label>
+                            <textarea id="form-message" rows="2" required class="w-full bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-brand-500 transition-colors resize-none" placeholder="Tulis masukan atau saran kamu secara terbuka..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-1.5 rounded-lg bg-brand-600 hover:bg-brand-700 text-white font-semibold text-xs transition-all duration-150 flex items-center justify-center gap-1 shadow-sm">
+                            <i data-lucide="send" class="w-3 h-3"></i>
+                            <span>Kirim Masukan</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="pt-4 border-t border-slate-900 flex flex-col sm:flex-row justify-between items-center gap-2 text-[9px]">
+                <span id="footer-copyright">&copy; 2026 Nash Studio. Hak Cipta Dilindungi.</span>
+                <div class="flex items-center gap-3">
+                    <a href="#" class="hover:text-white transition-colors">Kebijakan Privasi</a>
+                    <a href="#" class="hover:text-white transition-colors">Syarat Ketentuan</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- CONSULTATION MODAL -->
+    <div id="consultation-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/50 backdrop-blur-sm hidden">
+        <div class="bg-white rounded-xl max-w-xs w-full p-5 space-y-3 shadow-lg relative border border-slate-100">
+            <button onclick="closeConsultationModal()" class="absolute top-3.5 right-3.5 p-1 rounded-full hover:bg-slate-50 text-slate-400 hover:text-slate-600 transition-colors">
+                <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+            <div class="text-center space-y-1">
+                <div class="w-8 h-8 rounded-lg bg-brand-50 text-brand-600 flex items-center justify-center mx-auto mb-1">
+                    <i data-lucide="messages-square" class="w-4 h-4"></i>
+                </div>
+                <h3 id="modal-title" class="font-display font-extrabold text-base text-slate-900 leading-none">Konsultasi Gratis</h3>
+                <p class="text-slate-500 text-[10px]">Pilih jalur konsultasi tercepat bersama tim ahli dari Nash Studio.</p>
+            </div>
+
+            <div class="space-y-2">
+                <button onclick="redirectToWhatsApp('Konsultasi Umum')" class="w-full p-2.5 rounded-lg border border-slate-100 hover:border-brand-500 bg-slate-50/50 hover:bg-brand-50/20 text-left flex items-center justify-between transition-all duration-200 group">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-7 h-7 rounded-lg bg-amber-50 text-brand-600 flex items-center justify-center shrink-0">
+                            <i data-lucide="phone" class="w-3.5 h-3.5"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-[11px]">Chat via WhatsApp</h4>
+                            <p class="text-[9px] text-slate-400">Terhubung langsung sekarang juga.</p>
+                        </div>
+                    </div>
+                    <i data-lucide="arrow-right" class="w-3 h-3 text-slate-400 group-hover:translate-x-0.5 transition-transform"></i>
+                </button>
+
+                <button onclick="redirectToWhatsApp('Tanya Paket Harga')" class="w-full p-2.5 rounded-lg border border-slate-100 hover:border-brand-500 bg-slate-50/50 hover:bg-brand-50/20 text-left flex items-center justify-between transition-all duration-200 group">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-7 h-7 rounded-lg bg-orange-50 text-accent-orange flex items-center justify-center shrink-0">
+                            <i data-lucide="calculator" class="w-3.5 h-3.5"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-[11px]">Diskusikan Paket Harga</h4>
+                            <p class="text-[9px] text-slate-400">Rancang kustomisasi sesuai budgetmu.</p>
+                        </div>
+                    </div>
+                    <i data-lucide="arrow-right" class="w-3 h-3 text-slate-400 group-hover:translate-x-0.5 transition-transform"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-4 right-4 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="bg-slate-900 text-white px-4 py-2.5 rounded-lg shadow-md flex items-center gap-2 border border-slate-800">
+            <i id="toast-icon" data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i>
+            <span id="toast-text" class="text-xs font-medium">Masukan berhasil dikirimkan!</span>
+        </div>
+    </div>
+
+    <!-- APPLICATION SCRIPTS -->
+    <script>
+        // Global Data Store
+        let siteData = null;
+        let showAllProjects = false;
+        let currentCategory = 'all';
+
+        // Typing Effect Variables
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typingWords = ["Cepat", "Mudah", "Murah", "Estetis", "Keren", "Praktis"];
+
+        // Dynamic WhatsApp Number
+        let WA_PHONE_NUMBER = "6285640366256";
+
+        // Fetch & Load Data from data.json
+        async function loadSiteData() {
+            try {
+                const response = await fetch('./data.json');
+                if (!response.ok) throw new Error('Network error loading data.json');
+                siteData = await response.json();
+            } catch (error) {
+                console.warn('Gagal memuat data.json via fetch, menggunakan data cadangan internal:', error);
+                // Fallback store in case of local file protocol
+                siteData = {
+                    "brand": { "name": "Nash", "suffix": "Studio", "tagline": "Digital System", "whatsappNumber": "6285640366256", "description": "Jasa pengerjaan website inovatif dan pengembangan sistem administrasi berbasis Google Cloud & Spreadsheet." },
+                    "hero": { "titleLine1": "Jasa Pembuatan Website &", "titleLine2": "Sistem Digital yang", "typedWords": ["Cepat", "Mudah", "Murah", "Estetis", "Keren", "Praktis"], "subtitle": "Kami membantu kamu mengembangkan website modern yang rapi, super cepat, dan mudah dikelola.", "ctaPrimary": "Mulai Konsultasi Gratis", "ctaSecondary": "Lihat Hasil Kerja", "processBadge": "Pengerjaan Kilat: 3 - 7 Hari Kerja" },
+                    "problems": { "badge": "Hambatan Bisnis", "title": "Apakah Kamu Sering Mengalami Kendala Ini?", "description": "Banyak bisnis kesulitan berkembang karena data manual.", "items": [], "banner": { "badge": "Inovasi Bebas Biaya Server", "title": "Solusi Bebas Biaya Server Tahunan!", "description": "Bebas biaya langganan hosting selamanya.", "buttonText": "Lihat Jasa Kami" } },
+                    "services": { "badge": "Layanan Kami", "title": "Solusi Website & Sistem Untuk Usahamu", "description": "Pilih jenis solusi digital terbaik.", "items": [] },
+                    "portfolio": { "badge": "Karya Kami", "title": "Portofolio Project Terbaru", "description": "Berikut adalah hasil kerja nyata kami.", "categories": [{ "id": "all", "label": "Semua" }, { "id": "landing", "label": "Landing Page" }, { "id": "profile", "label": "Sistem & Company Profile" }], "defaultVisibleCount": 4, "items": [] },
+                    "whyUs": { "badge": "Keunggulan Kami", "title": "Kenapa Mempercayakan Nash Studio?", "description": "Kami memahami kamu memerlukan hasil terbaik.", "checklist": [], "highlights": [] },
+                    "pricing": { "badge": "Investasi Terjangkau", "title": "Pilihan Paket Harga Merakyat & Transparan", "description": "Misi kami adalah menghadirkan website handal ramah kantong.", "packages": [] },
+                    "testimonials": { "badge": "Kepuasan Klien", "title": "Apa Kata Mereka Tentang Kami?", "description": "Kami bangga dapat mendukung mitra setia kami.", "items": [] },
+                    "faq": { "badge": "Pusat Bantuan", "title": "Pertanyaan yang Sering Diajukan", "description": "Jawaban dari pertanyaan seputar pengerjaan web.", "items": [] },
+                    "finalCta": { "title": "Siap Jadikan Bisnis Kamu Lebih Maju & Efisien?", "description": "Tinggalkan pencatatan manual yang melelahkan.", "buttonText": "Hubungi Kami via WhatsApp" }
+                };
+            }
+
+            renderAllContent();
+        }
+
+        // Render All UI Sections from Data
+        function renderAllContent() {
+            if (!siteData) return;
+
+            // Brand & Contact
+            if (siteData.brand) {
+                WA_PHONE_NUMBER = siteData.brand.whatsappNumber || WA_PHONE_NUMBER;
+                document.getElementById('nav-brand-name').innerText = siteData.brand.name;
+                document.getElementById('nav-brand-suffix').innerText = siteData.brand.suffix;
+                document.getElementById('nav-brand-tag').innerText = siteData.brand.tagline;
+                document.getElementById('footer-brand-name').innerText = siteData.brand.name;
+                document.getElementById('footer-brand-suffix').innerText = siteData.brand.suffix;
+                document.getElementById('footer-brand-desc').innerText = siteData.brand.description;
+                document.getElementById('footer-copyright').innerHTML = `&copy; ${new Date().getFullYear()} ${siteData.brand.name} ${siteData.brand.suffix}. Hak Cipta Dilindungi.`;
+            }
+
+            // Hero Section
+            if (siteData.hero) {
+                document.getElementById('hero-title-1').innerText = siteData.hero.titleLine1;
+                document.getElementById('hero-title-2').innerText = siteData.hero.titleLine2;
+                document.getElementById('hero-subtitle').innerText = siteData.hero.subtitle;
+                document.getElementById('hero-cta-primary').innerText = siteData.hero.ctaPrimary;
+                document.getElementById('hero-cta-secondary').innerText = siteData.hero.ctaSecondary;
+                document.getElementById('hero-process-badge').innerText = siteData.hero.processBadge;
+                if (siteData.hero.typedWords && siteData.hero.typedWords.length > 0) {
+                    typingWords = siteData.hero.typedWords;
+                }
+            }
+
+            // Problems Section
+            if (siteData.problems) {
+                document.getElementById('problems-badge').innerText = siteData.problems.badge;
+                document.getElementById('problems-title').innerText = siteData.problems.title;
+                document.getElementById('problems-desc').innerText = siteData.problems.description;
+
+                const problemsGrid = document.getElementById('problems-grid');
+                problemsGrid.innerHTML = siteData.problems.items.map(item => `
+                    <div class="bg-white p-4 rounded-xl border border-slate-100 hover:border-brand-100 shadow-sm transition-all duration-200 group">
+                        <div class="w-8 h-8 rounded-lg bg-orange-50 flex items-center justify-center text-accent-orange mb-3">
+                            <i data-lucide="${item.icon}" class="w-4 h-4"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-sm text-slate-900 mb-1">${item.title}</h3>
+                        <p class="text-slate-500 text-[11px] leading-relaxed">${item.description}</p>
+                    </div>
+                `).join('');
+
+                if (siteData.problems.banner) {
+                    document.getElementById('banner-badge').innerText = siteData.problems.banner.badge;
+                    document.getElementById('banner-title').innerText = siteData.problems.banner.title;
+                    document.getElementById('banner-desc').innerText = siteData.problems.banner.description;
+                    document.getElementById('banner-btn').innerText = siteData.problems.banner.buttonText;
+                }
+            }
+
+            // Services Section
+            if (siteData.services) {
+                document.getElementById('services-badge').innerText = siteData.services.badge;
+                document.getElementById('services-title').innerText = siteData.services.title;
+                document.getElementById('services-desc').innerText = siteData.services.description;
+
+                const servicesGrid = document.getElementById('services-grid');
+                servicesGrid.innerHTML = siteData.services.items.map(item => `
+                    <div class="p-4 rounded-xl border border-slate-100 hover:border-brand-200 hover:shadow-sm transition-all duration-200 flex flex-col items-start bg-white group">
+                        <div class="w-8 h-8 rounded-lg bg-brand-50 text-brand-600 flex items-center justify-center mb-3">
+                            <i data-lucide="${item.icon}" class="w-4 h-4"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-sm text-slate-900 mb-1">${item.title}</h3>
+                        <p class="text-slate-500 text-[11px] leading-relaxed">${item.description}</p>
+                    </div>
+                `).join('');
+            }
+
+            // Portfolio Section
+            if (siteData.portfolio) {
+                document.getElementById('portfolio-badge').innerText = siteData.portfolio.badge;
+                document.getElementById('portfolio-title').innerText = siteData.portfolio.title;
+                document.getElementById('portfolio-desc').innerText = siteData.portfolio.description;
+
+                // Render Filter Tabs
+                const tabsContainer = document.getElementById('portfolio-tabs-container');
+                tabsContainer.innerHTML = siteData.portfolio.categories.map((cat, idx) => `
+                    <button onclick="filterPortfolio('${cat.id}')" id="tab-${cat.id}" class="portfolio-tab px-3.5 py-1 rounded-full text-[11px] font-semibold transition-all duration-200 ${idx === 0 ? 'bg-brand-600 text-white shadow-sm' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'}">
+                        ${cat.label}
+                    </button>
+                `).join('');
+
+                // Render Portfolio Cards
+                const portfolioGrid = document.getElementById('portfolio-grid');
+                portfolioGrid.innerHTML = siteData.portfolio.items.map(item => `
+                    <div class="portfolio-item bg-white rounded-xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col group" data-category="${item.category}">
+                        <div class="relative overflow-hidden aspect-[16/9] bg-slate-100">
+                            <div class="absolute inset-0 bg-gradient-to-tr from-brand-900/10 to-transparent z-10"></div>
+                            ${item.svg}
+                        </div>
+                        <div class="p-4 flex-grow flex flex-col justify-between">
+                            <div>
+                                <span class="px-2 py-0.5 bg-brand-50 text-brand-600 rounded-full text-[9px] font-bold uppercase tracking-wider mb-1 inline-block">${item.categoryLabel}</span>
+                                <h3 class="font-display font-bold text-base text-slate-900 mb-0.5">${item.title}</h3>
+                                <p class="text-slate-500 text-[11px] leading-relaxed mb-3">${item.description}</p>
+                            </div>
+                            <a href="${item.demoUrl}" target="_blank" class="w-full py-1.5 rounded-lg border border-slate-200 hover:border-brand-500 hover:text-brand-600 text-slate-600 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors duration-150">
+                                <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                                <span>Lihat Demo Web</span>
+                            </a>
+                        </div>
+                    </div>
+                `).join('');
+
+                updatePortfolioVisibility();
+            }
+
+            // Why Us Section
+            if (siteData.whyUs) {
+                document.getElementById('whyus-badge').innerText = siteData.whyUs.badge;
+                document.getElementById('whyus-title').innerText = siteData.whyUs.title;
+                document.getElementById('whyus-desc').innerText = siteData.whyUs.description;
+
+                const checklistContainer = document.getElementById('whyus-checklist');
+                checklistContainer.innerHTML = siteData.whyUs.checklist.map(item => `
+                    <div class="flex items-start gap-2.5">
+                        <div class="w-7 h-7 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center shrink-0">
+                            <i data-lucide="check" class="w-4 h-4"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-display font-bold text-sm text-slate-900 mb-0.5">${item.title}</h4>
+                            <p class="text-slate-500 text-[11px] leading-relaxed">${item.description}</p>
+                        </div>
+                    </div>
+                `).join('');
+
+                const highlightsContainer = document.getElementById('whyus-highlights');
+                highlightsContainer.innerHTML = siteData.whyUs.highlights.map((item, idx) => `
+                    <div class="p-4 rounded-xl ${idx === 0 ? 'bg-brand-50 border border-brand-100' : 'bg-orange-50 border border-orange-100'} flex gap-3.5 items-start">
+                        <div class="w-8 h-8 rounded-lg ${idx === 0 ? 'bg-brand-500' : 'bg-accent-orange'} text-white flex items-center justify-center shrink-0 shadow-sm">
+                            <i data-lucide="${item.icon}" class="w-4 h-4"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-display font-bold text-slate-900 text-sm mb-0.5">${item.title}</h4>
+                            <p class="text-slate-500 text-[11px] leading-relaxed">${item.description}</p>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Pricing Section
+            if (siteData.pricing) {
+                document.getElementById('pricing-badge').innerText = siteData.pricing.badge;
+                document.getElementById('pricing-title').innerText = siteData.pricing.title;
+                document.getElementById('pricing-desc').innerText = siteData.pricing.description;
+
+                const pricingGrid = document.getElementById('pricing-grid');
+                pricingGrid.innerHTML = siteData.pricing.packages.map(pkg => `
+                    <div class="bg-white rounded-xl p-5 ${pkg.isRecommended ? 'border-2 border-brand-500 shadow-md' : 'border border-slate-200 hover:border-brand-500 shadow-sm'} transition-all duration-200 flex flex-col justify-between relative group">
+                        ${pkg.isRecommended ? `
+                            <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full bg-brand-500 text-white text-[8px] font-bold tracking-wider uppercase shadow-sm">
+                                REKOMENDASI UTAMA
+                            </div>
+                        ` : ''}
+
+                        <div class="space-y-3">
+                            <div class="space-y-0.5">
+                                <span class="text-[8px] font-bold text-brand-600 bg-brand-50 px-2 py-0.5 rounded-full uppercase tracking-wider">${pkg.name}</span>
+                                <h3 class="font-display font-extrabold text-base text-slate-900 leading-tight">${pkg.title}</h3>
+                                <p class="text-slate-500 text-[10px]">${pkg.description}</p>
+                            </div>
+
+                            <div class="py-2 border-y border-slate-100">
+                                <span class="text-slate-400 text-[9px] font-medium">Biaya sekali bayar</span>
+                                <div class="flex items-baseline gap-0.5 mt-0.5 flex-wrap">
+                                    ${pkg.pricePrefix ? `<span class="text-slate-900 font-display font-bold text-xs mr-1">${pkg.pricePrefix}</span>` : ''}
+                                    <span class="text-slate-900 font-display font-extrabold text-xl md:text-2xl">${pkg.price}</span>
+                                    <span class="text-slate-400 text-[9px]">${pkg.priceUnit}</span>
+                                </div>
+                            </div>
+
+                            <ul class="space-y-1.5 text-xs text-slate-600">
+                                ${pkg.features.map(feat => `
+                                    <li class="flex items-start gap-1.5">
+                                        <i data-lucide="check-circle" class="w-3.5 h-3.5 text-brand-500 shrink-0 mt-0.5"></i>
+                                        <span>${feat}</span>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+
+                        <div class="mt-4">
+                            <button onclick="selectPackage('${pkg.name} - ${pkg.title}')" class="w-full py-1.5 rounded-lg ${pkg.isRecommended ? 'bg-brand-600 hover:bg-brand-700 text-white shadow-sm' : 'border border-slate-200 hover:border-brand-500 hover:text-brand-600 text-slate-700'} font-semibold text-[11px] transition-all duration-150 active:scale-95">
+                                ${pkg.buttonText}
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Testimonials Section
+            if (siteData.testimonials) {
+                document.getElementById('testi-badge').innerText = siteData.testimonials.badge;
+                document.getElementById('testi-title').innerText = siteData.testimonials.title;
+                document.getElementById('testi-desc').innerText = siteData.testimonials.description;
+
+                const testiGrid = document.getElementById('testimonials-grid');
+                testiGrid.innerHTML = siteData.testimonials.items.map(t => `
+                    <div class="p-5 rounded-xl border border-slate-100 bg-slate-50/40 flex flex-col justify-between">
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-0.5">
+                                ${Array.from({ length: t.rating }).map(() => `<i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>`).join('')}
+                            </div>
+                            <p class="text-slate-600 text-[11px] leading-relaxed italic">"${t.comment}"</p>
+                        </div>
+                        <div class="flex items-center gap-2.5 mt-4 pt-3 border-t border-slate-100">
+                            <div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center font-bold text-slate-600 text-[10px]">${t.initials}</div>
+                            <div>
+                                <h4 class="font-display font-bold text-slate-900 text-xs">${t.name}</h4>
+                                <p class="text-slate-400 text-[9px]">${t.role}</p>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // FAQ Section
+            if (siteData.faq) {
+                document.getElementById('faq-badge').innerText = siteData.faq.badge;
+                document.getElementById('faq-title').innerText = siteData.faq.title;
+                document.getElementById('faq-desc').innerText = siteData.faq.description;
+
+                const faqContainer = document.getElementById('faq-accordion');
+                faqContainer.innerHTML = siteData.faq.items.map(item => `
+                    <div class="accordion-item bg-white border border-slate-200 rounded-xl overflow-hidden transition-all duration-200">
+                        <button onclick="toggleAccordion(this)" class="w-full py-3 px-4 flex items-center justify-between text-left font-display font-bold text-xs text-slate-900 hover:text-brand-600 transition-colors duration-150">
+                            <span>${item.question}</span>
+                            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 transition-transform duration-200 transform shrink-0"></i>
+                        </button>
+                        <div class="accordion-content bg-slate-50/30">
+                            <div class="p-4 pt-0 text-slate-500 text-[11px] leading-relaxed border-t border-slate-100/50">
+                                ${item.answer}
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Final CTA
+            if (siteData.finalCta) {
+                document.getElementById('final-cta-title').innerText = siteData.finalCta.title;
+                document.getElementById('final-cta-desc').innerText = siteData.finalCta.description;
+                document.getElementById('final-cta-btn').innerText = siteData.finalCta.buttonText;
+            }
+
+            // Refresh Icons
+            lucide.createIcons();
+        }
+
+        // Typing Effect Function
+        function typeEffect() {
+            const currentWord = typingWords[wordIndex] || "Cepat";
+            const typedTextElement = document.getElementById('typed-text');
+            if (!typedTextElement) return;
+
+            if (isDeleting) {
+                typedTextElement.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typedTextElement.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = 120;
+            if (isDeleting) typeSpeed /= 2;
+
+            if (!isDeleting && charIndex === currentWord.length) {
+                typeSpeed = 1500;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % typingWords.length;
+                typeSpeed = 300;
+            }
+
+            setTimeout(typeEffect, typeSpeed);
+        }
+
+        // On DOM Loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            loadSiteData();
+            typeEffect();
+        });
+
+        // Sticky Navbar Glass Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('glassmorphism', 'shadow-sm', 'border-slate-200/40');
+            } else {
+                navbar.classList.remove('glassmorphism', 'shadow-sm', 'border-slate-200/40');
+            }
+        });
+
+        // Mobile Menu Toggling
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            if (isHidden) {
+                mobileMenu.classList.remove('hidden');
+                menuIcon.setAttribute('data-lucide', 'x');
+            } else {
+                mobileMenu.classList.add('hidden');
+                menuIcon.setAttribute('data-lucide', 'menu');
+            }
+            lucide.createIcons();
+        });
+
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIcon.setAttribute('data-lucide', 'menu');
+                lucide.createIcons();
+            });
+        });
+
+        // Portfolio Category Filter & Show-more Logic
+        function filterPortfolio(category) {
+            currentCategory = category;
+            
+            const tabs = document.querySelectorAll('.portfolio-tab');
+            tabs.forEach(tab => {
+                tab.className = "portfolio-tab px-3.5 py-1 rounded-full text-[11px] font-semibold transition-all duration-200 bg-white text-slate-600 border border-slate-200 hover:bg-slate-50";
+            });
+
+            const activeTab = document.getElementById(`tab-${category}`);
+            if (activeTab) {
+                activeTab.className = "portfolio-tab px-3.5 py-1 rounded-full text-[11px] font-semibold transition-all duration-200 bg-brand-600 text-white shadow-sm";
+            }
+
+            updatePortfolioVisibility();
+        }
+
+        function toggleShowAllProjects() {
+            showAllProjects = !showAllProjects;
+            const btnText = document.getElementById('toggle-portfolio-text');
+            const btnIcon = document.getElementById('toggle-portfolio-icon');
+            
+            if (showAllProjects) {
+                btnText.innerText = "Sembunyikan Sebagian";
+                btnIcon.setAttribute('data-lucide', 'chevron-up');
+            } else {
+                btnText.innerText = "Lihat Semua Proyek";
+                btnIcon.setAttribute('data-lucide', 'chevron-down');
+                document.getElementById('portfolio').scrollIntoView({ behavior: 'smooth' });
+            }
+            lucide.createIcons();
+            updatePortfolioVisibility();
+        }
+
+        function updatePortfolioVisibility() {
+            const items = document.querySelectorAll('.portfolio-item');
+            const defaultLimit = siteData?.portfolio?.defaultVisibleCount || 4;
+            let matchedCount = 0;
+
+            items.forEach(item => {
+                const itemCat = item.getAttribute('data-category');
+                const isMatching = (currentCategory === 'all' || itemCat === currentCategory);
+
+                if (isMatching) {
+                    matchedCount++;
+                    if (showAllProjects || matchedCount <= defaultLimit) {
+                        item.style.display = 'flex';
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'scale(1)';
+                        }, 50);
+                    } else {
+                        item.style.opacity = '0';
+                        item.style.transform = 'scale(0.98)';
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, 200);
+                    }
+                } else {
+                    item.style.opacity = '0';
+                    item.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        item.style.display = 'none';
+                    }, 200);
+                }
+            });
+
+            const totalMatches = Array.from(items).filter(item => {
+                const itemCat = item.getAttribute('data-category');
+                return currentCategory === 'all' || itemCat === currentCategory;
+            }).length;
+
+            const toggleContainer = document.getElementById('toggle-portfolio-container');
+            if (totalMatches > defaultLimit) {
+                toggleContainer.classList.remove('hidden');
+            } else {
+                toggleContainer.classList.add('hidden');
+            }
+        }
+
+        // Accordion (FAQ) System
+        function toggleAccordion(button) {
+            const item = button.parentElement;
+            const icon = button.querySelector('[data-lucide="chevron-down"]');
+            const isActive = item.classList.contains('accordion-active');
+
+            document.querySelectorAll('.accordion-item').forEach(el => {
+                el.classList.remove('accordion-active');
+                const otherIcon = el.querySelector('[data-lucide="chevron-down"]');
+                if (otherIcon) otherIcon.style.transform = 'rotate(0deg)';
+            });
+
+            if (!isActive) {
+                item.classList.add('accordion-active');
+                if (icon) icon.style.transform = 'rotate(180deg)';
+            } else {
+                if (icon) icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Consultation Modal Controllers
+        function openConsultationModal() {
+            document.getElementById('consultation-modal').classList.remove('hidden');
+        }
+
+        function closeConsultationModal() {
+            document.getElementById('consultation-modal').classList.add('hidden');
+        }
+
+        document.getElementById('consultation-modal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('consultation-modal')) {
+                closeConsultationModal();
+            }
+        });
+
+        function selectPackage(packageName) {
+            openConsultationModal();
+            const modalTitle = document.getElementById('modal-title');
+            modalTitle.innerText = `Tertarik dengan ${packageName}`;
+        }
+
+        function redirectToWhatsApp(topic) {
+            const text = `Halo Nash Studio, aku tertarik untuk berkonsultasi mengenai: ${topic}. Boleh info selengkapnya? Terima kasih banyak ya!`;
+            const encodedText = encodeURIComponent(text);
+            window.open(`https://api.whatsapp.com/send?phone=${WA_PHONE_NUMBER}&text=${encodedText}`, '_blank');
+            closeConsultationModal();
+        }
+
+        // Toast Notification System
+        function showToast(message, isSuccess = true) {
+            const toast = document.getElementById('toast');
+            const toastText = document.getElementById('toast-text');
+            const toastIcon = document.getElementById('toast-icon');
+
+            toastText.innerText = message;
+            if (isSuccess) {
+                toastIcon.setAttribute('data-lucide', 'check-circle');
+                toastIcon.className = "w-4 h-4 text-emerald-400";
+            } else {
+                toastIcon.setAttribute('data-lucide', 'alert-circle');
+                toastIcon.className = "w-4 h-4 text-rose-400";
+            }
+            lucide.createIcons();
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // Feedback Submission via WhatsApp
+        function handleFeedbackSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('form-name').value;
+            const contact = document.getElementById('form-contact').value;
+            const message = document.getElementById('form-message').value;
+
+            if (name && contact && message) {
+                const waMessage = `Halo Nash Studio! Aku ingin mengirimkan Kritik & Saran:\n\n` +
+                                  `*Nama:* ${name}\n` +
+                                  `*Kontak:* ${contact}\n` +
+                                  `*Kritik & Saran:* ${message}`;
+                                  
+                const encodedText = encodeURIComponent(waMessage);
+                showToast(`Menghubungkan ke WhatsApp... Terima kasih banyak ya, ${name}!`);
+                
+                setTimeout(() => {
+                    window.open(`https://api.whatsapp.com/send?phone=${WA_PHONE_NUMBER}&text=${encodedText}`, '_blank');
+                    document.getElementById('feedback-form').reset();
+                }, 1000);
+            } else {
+                showToast('Mohon lengkapi seluruh kolom masukan ya!', false);
+            }
+        }
+    </script>
+</body>
+</html>
